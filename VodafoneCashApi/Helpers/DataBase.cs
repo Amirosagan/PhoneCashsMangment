@@ -144,5 +144,13 @@ namespace VodafoneCashApi.Helpers
       Transaction.Date = transaction.Date;
       this.SaveChanges();
     }
+
+    public Transactions GetLastTransaction(string number)
+    {
+      var Transaction = _context.Transactions.Where((e)=> e.NumberId.Equals(number)).OrderByDescending((e)=> e.Date).FirstOrDefault();
+      if(Transaction == null)
+        throw new Exception("Number not Exect");
+      return Transaction;
+    }
   }
 }

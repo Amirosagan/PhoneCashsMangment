@@ -20,6 +20,7 @@ namespace VodafoneCashApi.Interfaces
         public void UpdateNumber(string number, Decimal amount);
         public void UpdateTransaction(Transactions transaction);
         public void DeleteNumber(string number);
-        public void DeleteTransaction(Guid transactionId);   
+        public void DeleteTransaction(Guid transactionId); 
+        public Transactions GetLastTransaction(string number);  
     }
 }

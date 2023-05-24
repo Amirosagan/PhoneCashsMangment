@@ -18,6 +18,8 @@ namespace VodafoneCashApi.Interfaces
         public List<Transactions> GetAllTransaction();
         public Numbers GetNumber(string number);
         public Transactions GetTransaction(Guid transactionId);
+        public Transactions GetLastTransaction(string number);
+        public List<Transactions> GetTransactionsByNumber(string number);
         
     }
 }

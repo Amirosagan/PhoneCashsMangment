@@ -78,5 +78,33 @@ namespace VodafoneCashApi.Controllers
 
             return Ok(number);
         }
+
+        [HttpGet]
+        [Route("GetTransactions")]
+        public ActionResult<IEnumerable<Models.Transactions>> GetTransactions(string number)
+        {
+            try
+            {
+                return Ok(_dataBase.GetTransactionsByNumber(number));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetLastTransaction")]
+        public ActionResult<Models.Transactions> GetLastTransaction(string number)
+        {
+            try
+            {
+                return Ok(_dataBase.GetLastTransaction(number));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

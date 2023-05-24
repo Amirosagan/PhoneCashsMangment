@@ -61,6 +61,13 @@ namespace VodafoneCashApi.Helpers
         return _context.GetTransactions().ToList();
     }
 
+    public Transactions GetLastTransaction(string number)
+    {
+        if(!_context.NumberExists(number))
+            throw new Exception("Number does not exist");
+        return _context.GetLastTransaction(number);
+    }
+
     public Numbers GetNumber(string number)
     {
       return _context.GetNumber(number);
@@ -71,8 +78,17 @@ namespace VodafoneCashApi.Helpers
         return _context.GetTransaction(transactionId);
     }
 
+    public List<Transactions> GetTransactionsByNumber(string number)
+    {
+        if(!_context.NumberExists(number))
+            throw new Exception("Number does not exist");
+        return _context.GetTransactionsByNumber(number).ToList();
+    }
+
     public void UpdateNumber(string number, decimal amount)
     {
+        if(!_context.NumberExists(number))
+            throw new Exception("Number does not exist");
         _context.UpdateNumber(number, amount);
     }
 

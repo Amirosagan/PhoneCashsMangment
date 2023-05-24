@@ -48,6 +48,14 @@ namespace VodafoneCashApi.Test.DatabaseTest
       _transaction.Remove(GetTransaction(transactionId));
     }
 
+    public Transactions GetLastTransaction(string number)
+    {
+      var transaction = _transaction.Where(x => x.NumberId == number).OrderByDescending(x => x.Date).FirstOrDefault();
+      if (transaction == null)
+        throw new Exception("Transaction does not exist");
+      return transaction;
+    }
+
     public Numbers GetNumber(string number)
     {
       var Number = _number.FirstOrDefault(x => x.Number == number);
@@ -415,6 +423,65 @@ namespace VodafoneCashApi.Test.DatabaseTest
       Assert.Throws<Exception>(() => _operationsDb.DeleteTransaction(Guid.Parse("00000000-0000-0000-0000-000000000001")));
     }
 
+    [Fact]
+    public void GetLastTransacion()
+    {
+      _operationsDb.AddNumber("01000000000", 0);
+      _operationsDb.AddTransaction(new Transactions
+      {
+        NumberId = "01000000000",
+        TransactionAmount = 10,
+        CashBefore = 0,
+        CashAfter = 10,
+        Date = DateTime.Now
+        ,TransactionId = Guid.Parse("00000000-0000-0000-0000-000000000000")
+      });
+      _operationsDb.AddTransaction(new Transactions
+      {
+        NumberId = "01000000000",
+        TransactionAmount = 10,
+        CashBefore = 10,
+        CashAfter = 20,
+        Date = DateTime.Now
+        ,TransactionId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+      });
 
+      Assert.Equal(2, _operationsDb.GetAllTransaction().Count());
+      Assert.Equal(1, _operationsDb.GetAllNumber().Count());
+      Assert.Equal(20, _operationsDb.GetLastTransaction("01000000000").CashAfter);
+    }
+    [Fact]
+    public void GetLastTransacion_ThrowsException()
+    {
+      Assert.Throws<Exception>(() => _operationsDb.GetLastTransaction("01000000000"));
+    }
+    [Fact]
+    public void GetTransactions_with_numbers()
+    {
+      _operationsDb.AddNumber("01000000000", 0);
+      _operationsDb.AddTransaction(new Transactions
+      {
+        NumberId = "01000000000",
+        TransactionAmount = 10,
+        CashBefore = 0,
+        CashAfter = 10,
+        Date = DateTime.Now
+        ,TransactionId = Guid.Parse("00000000-0000-0000-0000-000000000000")
+      });
+      _operationsDb.AddTransaction(new Transactions
+      {
+        NumberId = "01000000000",
+        TransactionAmount = 10,
+        CashBefore = 10,
+        CashAfter = 20,
+        Date = DateTime.Now
+        ,TransactionId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+      });
+
+      Assert.Equal(2, _operationsDb.GetAllTransaction().Count());
+      Assert.Equal(1, _operationsDb.GetAllNumber().Count());
+      Assert.Equal(20, _operationsDb.GetLastTransaction("01000000000").CashAfter);
+      Assert.Equal(2, _operationsDb.GetTransactionsByNumber("01000000000").Count());
+    }
   }
 }
