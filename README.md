@@ -1,6 +1,6 @@
 # Project Title
 
-A brief description of your project goes here.
+This side project to mange PhoneCash Numbers.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ A brief description of your project goes here.
 
 ## Project Description
 
-I Make A Vodafone Cash Api Using Asp.Net 7.0 To Mange My Payments And Transactions in All my Numbers
+I Make A Vodafone Cash Api Using Asp.Net 7.0 To Mange My Payments And Transactions in All my Numbers and used Sqlite Database.
 
 ## Features
 
@@ -49,12 +49,12 @@ I Make A Vodafone Cash Api Using Asp.Net 7.0 To Mange My Payments And Transactio
     dotnet restore
     dotnet build
     dotnet run 
-  ```
+    ```
 
 ### InstallationWithDocker
 
   ```shell
-        git clone https://github.com/Amirosagan/PhoneCashsMangment.git
+    git clone https://github.com/Amirosagan/PhoneCashsMangment.git
     cd PhoneCashsMangment
     git checkout main-docker
     docker build -t phonecashsmangment .
