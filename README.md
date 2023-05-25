@@ -11,7 +11,6 @@ This side project to mange PhoneCash Numbers.
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-    - [InstallationWithDocker](#installationwithdocker)
   - [API Documentation](#api-documentation)
   - [License](#license)
 
